@@ -5,14 +5,12 @@ import sys
 import subprocess
 import argparse
 
-import packages
+from packages import *
 from util import *
 
 #import cfg
 
-PACKAGES = [getattr(packages, package_name)() for package_name in package_names]
-
-
+PACKAGES = [] # TODO: Package graph
 
 FLAGS = parse_args()
 
@@ -27,7 +25,14 @@ def install():
                 log(f"Skipping {pkg.name}...")
         else:
             log(f"{pkg} is installed. Skipping...")
-        
+
+
+def check_packages():
+    for pkg in PACKAGES:
+        if not pkg.exists:
+            log(f"Package {pkg.name} is not installed, but is not implemented. Please implement it and try again.", "ERROR")
+            sys.exit(1)
+
 
 if __name__ == "__main__":
-    install()
+    pass

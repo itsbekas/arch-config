@@ -1,0 +1,43 @@
+# System Requirements
+amd-ucode
+grub
+sudo
+efibootmgr
+os-prober
+
+# Window Manager
+wayland
+xorg-xwayland
+sway
+
+# Utilities
+plocate
+xdg-utils
+gnome-keyring
+noto-fonts-emoji
+openvpn
+
+# Basic Requirements
+alacritty
+zsh
+
+# Customization
+ttf-fira-code
+
+# Browser/Media
+vivaldi
+vivaldi-ffmpeg-codecs
+spotify-launcher
+
+# System Config (Network, Audio, etc...)
+iwd
+pulseaudio
+pamixer
+acpi
+acpid
+
+# Coding/Development
+git
+github-cli
+python
+npm

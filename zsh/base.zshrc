@@ -12,5 +12,3 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # Oh my ZSH
 export ZSH="/usr/share/oh-my-zsh"
-plugins=(ssh-agent)
-

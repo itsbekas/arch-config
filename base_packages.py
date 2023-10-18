@@ -37,17 +37,29 @@ class Package:
     def __run_cmd(self, cmd):
         return run_cmd(cmd)
 
-    def install(self):
-        self.__install_requirements(self.requirements)
-        run_cmd(f"sudo pacman -S {pkg}")
-        self.__install_requirements(self.post_requirements)
-        self.is_installed = True
-
     def __install_requirements(self, requirements):
         requirements = [requirement() for requirement in requirements]
         for requirement in requirements:
             if not requirement.exists():
                 requirement.install()
+
+    def __load_config(self):
+        with open(self.output_location, "w") as output_file:
+            for config_file in self.config_files:
+                with open(f"config/{self.config_directory}/{config_file}") as input_file:
+                    output_file.write(input_file.read())
+
+    def __reload(self):
+        # TODO: Implement reloading
+        pass
+
+    def install(self):
+        self.__install_requirements(self.requirements)
+        run_cmd(f"sudo pacman -S {pkg}")
+        self.__install_requirements(self.post_requirements)
+        self.__load_config()
+        self.__reload()
+        self.is_installed = True
 
     def exists(self):
         return os.path.exists("/usr/bin/" + pkg) or os.path.exists("/bin/" + pkg)

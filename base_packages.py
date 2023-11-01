@@ -34,9 +34,6 @@ class Package:
         self.extras = [globals()[pkg] for pkg in extra_pkgs]
         self.post_requirements = [globals()[pkg] for pkg in post_requirement_pkgs]
 
-    def __run_cmd(self, cmd):
-        return run_cmd(cmd)
-
     def __install_requirements(self, requirements):
         requirements = [requirement() for requirement in requirements]
         for requirement in requirements:
@@ -53,9 +50,12 @@ class Package:
         # TODO: Implement reloading
         pass
 
+    def run_cmd(self, cmd):
+        return run_cmd(cmd)
+
     def install(self):
         self.__install_requirements(self.requirements)
-        run_cmd(f"sudo pacman -S {pkg}")
+        self.run_cmd(f"sudo pacman -S {pkg}")
         self.__install_requirements(self.post_requirements)
         self.__load_config()
         self.__reload()
@@ -79,7 +79,7 @@ class AURPackage(Package):
 
     def install(self):
         self.__install_requirements()
-        run_cmd(f"yay -S {pkg}")
+        self.run_cmd(f"yay -S {pkg}")
 
 
 class CustomPackage(Package):

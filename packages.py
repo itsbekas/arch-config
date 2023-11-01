@@ -22,11 +22,11 @@ class yay(CustomPackage):
     requirements = ["git", "base_devel"]
 
     def install(self):
-        self.__run_cmd("git clone https://aur.archlinux.org/yay-bin.git")
-        self.__run_cmd("cd yay-bin")
-        self.__run_cmd("makepkg -si")
-        self.__run_cmd("cd ..")
-        self.__run_cmd("rm -rf yay-bin")
+        self.run_cmd("git clone https://aur.archlinux.org/yay-bin.git")
+        self.run_cmd("cd yay-bin")
+        self.run_cmd("makepkg -si")
+        self.run_cmd("cd ..")
+        self.run_cmd("rm -rf yay-bin")
 
 
 class powerlevel10k(AURPackage):
@@ -53,3 +53,11 @@ class vivaldi_ffmepg_codecs(AURPackage):
 
 class vivaldi_update_ffmepg_hook(AURPackage):
     requirements = [vivaldi]
+
+class docker(Package):
+    # TODO: add user to group docker
+    extras = ["docker-compose"]
+    
+    def check_installed(self):
+        #TODO: sudo docker run hello-world
+        pass
